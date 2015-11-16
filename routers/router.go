@@ -25,6 +25,16 @@ func init() {
 				&controllers.UserController{},
 			),
 		),
+		beego.NSNamespace("/category",
+			beego.NSInclude(
+				&controllers.CategoryController{},
+			),
+		),
+		beego.NSNamespace("/todo",
+			beego.NSInclude(
+				&controllers.TodoController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }
