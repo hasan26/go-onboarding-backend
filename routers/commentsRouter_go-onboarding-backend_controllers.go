@@ -83,6 +83,27 @@ func init() {
 			[]string{"post"},
 			nil})
 
+	beego.GlobalControllerRouter["go-onboarding-backend/controllers:TodoController"] = append(beego.GlobalControllerRouter["go-onboarding-backend/controllers:TodoController"],
+		beego.ControllerComments{
+			"GetAll",
+			`/`,
+			[]string{"get"},
+			nil})
+
+	beego.GlobalControllerRouter["go-onboarding-backend/controllers:TodoController"] = append(beego.GlobalControllerRouter["go-onboarding-backend/controllers:TodoController"],
+		beego.ControllerComments{
+			"Get",
+			`/:datetime`,
+			[]string{"get"},
+			nil})
+
+	beego.GlobalControllerRouter["go-onboarding-backend/controllers:TodoController"] = append(beego.GlobalControllerRouter["go-onboarding-backend/controllers:TodoController"],
+		beego.ControllerComments{
+			"Put",
+			`/:id`,
+			[]string{"put"},
+			nil})
+
 	beego.GlobalControllerRouter["go-onboarding-backend/controllers:UserController"] = append(beego.GlobalControllerRouter["go-onboarding-backend/controllers:UserController"],
 		beego.ControllerComments{
 			"Post",

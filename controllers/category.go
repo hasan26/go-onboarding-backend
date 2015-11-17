@@ -7,14 +7,14 @@ import (
 	"github.com/astaxie/beego"
 )
 
-// Todo API
+// Category API
 type CategoryController struct {
 	beego.Controller
 }
 
-// @Title GetAll
-// @Description get all Category
-// @Success 200 {category} models.Category
+// @Title getAllCategory
+// @Description get all data category
+// @Success 200 {int} models.Category
 // @router / [get]
 func (c *CategoryController ) GetAll() {
 	result, err := models.GetAllCategory()
@@ -30,7 +30,7 @@ func (c *CategoryController ) GetAll() {
 
 // @Title Get
 // @Description get category by id
-// @Param	id		path 	string	true	
+// @Param	id		path 	string	true		"The key for staticblock"
 // @Success 200 {object} models.Category
 // @Failure 403 :id is empty
 // @router /:id [get]
@@ -54,9 +54,10 @@ func (c *CategoryController ) Get() {
 	c.ServeJson()
 }
 
-// @Title created new category
+// @Title createCategory
 // @Description create category
-// @Param	body		body 	models.Category	true		"body for user content"
+// @Param	body		body 	models.Categori	true		"body for category content"
+// @Success 200 {int} models.Category.Id
 // @Failure 403 body is empty
 // @router / [post]
 func (c *CategoryController ) Post() {
@@ -75,11 +76,11 @@ func (c *CategoryController ) Post() {
 }
 
 
-// @Title delete
+// @Title deleteCategory
 // @Description delete the category
-// @Param	id		path 	string	true		"The uid you want to delete"
+// @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
-// @Failure 403 id is empty
+// @Failure 403 uid is empty
 // @router /:id [delete]
 func (c *CategoryController )  Delete() {
 	cId := c.Ctx.Input.Param(":id")
@@ -100,19 +101,20 @@ func (c *CategoryController )  Delete() {
 	c.ServeJson()
 }
 
-// @Title update
+// @Title updateCategory
 // @Description update the category
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	models.Category	true		"body for user content"
+// @Param	body		body 	models.User	true		"body for user content"
 // @Success 200 {object} models.Category
 // @Failure 403 :id is not int
 // @router /:id [put]
 func (c *CategoryController ) Put() {
 
 	var ob models.Category
-	json.Unmarshal(c.Ctx.Input.RequestBody, &ob)
+	cId := c.Ctx.Input.Param(":id")
+	Id, err := strconv.Atoi(cId)
 
-	_, err := models.GetById(ob.Id);
+	_, err = models.GetById(Id);
 	if  err == nil {
 		_, success := models.UpdateCategory(&ob)
 

@@ -8,8 +8,8 @@ import (
 )
 
 type Category struct {
-	Id   	  int
-	Name      string
+	Id 			int    `orm:"column(id);auto"`  
+	Name 		string `orm:"column(title);size(50)"` 
 }
 
 
@@ -45,7 +45,7 @@ func GetById(id int) (*Category, error) {
 	if (err == nil) {
 		return c, nil
 	} else {
-		return nil, errors.New("No Data Found")
+		return nil, errors.New("Data Not Found")
 	}
 }
 
